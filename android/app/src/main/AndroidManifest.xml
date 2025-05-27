@@ -1,4 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <queries>
+        <package android:name="com.whatsapp" />
+    </queries>
+
     <application
         android:label="centro_medico_dayenu"
         android:name="${applicationName}"
