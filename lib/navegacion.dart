@@ -1,3 +1,4 @@
+import 'package:centro_medico_dayenu/acceso/acceso.dart';
 import 'package:centro_medico_dayenu/crear_cita/crear_cita.dart';
 import 'package:centro_medico_dayenu/mensajes/mensajes.dart';
 import 'package:centro_medico_dayenu/principal/principal.dart';
@@ -16,6 +17,15 @@ class _NavegacionState extends State<Navegacion> {
   int _indiceActual = 0;
   String tipoUsuario = "admin"; // "admin", "doctor" o "recepcionista"
 
+// Añadi este método para cerrar sesión
+  void _logout(BuildContext context) {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (_) => const LoginScreen()),
+    );
+  }
+   
+   
   @override
   Widget build(BuildContext context) {
     //arreglo para pantallas
@@ -61,6 +71,16 @@ class _NavegacionState extends State<Navegacion> {
 
     //Barra baja que hace la navegación de las pantallas
     return Scaffold(
+      // Añadi este apbar 
+      appBar: AppBar(
+        title: const Text('Dayenú'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.logout),
+            onPressed: () => _logout(context),
+          ),
+        ],
+      ),
       body: pantallas[_indiceActual],
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.white,
