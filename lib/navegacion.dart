@@ -1,3 +1,4 @@
+import 'package:centro_medico_dayenu/crear_cita/cita.dart';
 import 'package:centro_medico_dayenu/crear_cita/crear_cita.dart';
 import 'package:centro_medico_dayenu/mensajes/mensajes.dart';
 import 'package:centro_medico_dayenu/principal/principal.dart';
@@ -12,6 +13,8 @@ class Navegacion extends StatefulWidget {
 }
 
 class _NavegacionState extends State<Navegacion> {
+  List<Cita> _citas = [];
+
   //indice para controlar las pantallas
   int _indiceActual = 0;
   String tipoUsuario = "admin"; // "admin", "doctor" o "recepcionista"
@@ -25,8 +28,8 @@ class _NavegacionState extends State<Navegacion> {
     //Si el usuario es admin se muestras las pantallas: principal, crearCita, mensajes, reportes
     if (tipoUsuario == "admin") {
       pantallas = [
-        const PantallaPrincipal(),
-        const PantallaCrearCita(),
+        PantallaPrincipal(citas: _citas),
+        PantallaCrearCita(onCrearCita: _agregarCita),
         const PantallaMensajes(),
         const PantallaReportes(),
       ];
@@ -39,7 +42,7 @@ class _NavegacionState extends State<Navegacion> {
       //si el usuario es doctor se muestras las pantllas principal y mensajes
     } else if (tipoUsuario == "doctor") {
       pantallas = [
-        const PantallaPrincipal(),
+        PantallaPrincipal(citas: _citas),
         const PantallaMensajes(),
       ];
       items = const [
@@ -48,8 +51,8 @@ class _NavegacionState extends State<Navegacion> {
       ];
     } else { // si es usuario es recepcionista se muestran las pantallas principal, crearcita, mensajes
       pantallas = [
-        const PantallaPrincipal(),
-        const PantallaCrearCita(),
+        PantallaPrincipal(citas: _citas),
+        PantallaCrearCita(onCrearCita: _agregarCita),
         const PantallaMensajes(),
       ];
       items = const [
@@ -77,5 +80,13 @@ class _NavegacionState extends State<Navegacion> {
       ),
     );
   }
+
+  void _agregarCita(Cita nuevaCita) {
+  setState(() {
+    _citas.add(nuevaCita);
+    _indiceActual = 0; // regresar a la pantalla principal
+  });
+}
+
 }
 
