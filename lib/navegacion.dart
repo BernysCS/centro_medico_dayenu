@@ -6,7 +6,9 @@ import 'package:centro_medico_dayenu/reportes/reportes.dart';
 import 'package:flutter/material.dart';
 
 class Navegacion extends StatefulWidget {
-  const Navegacion({super.key});
+  const Navegacion({super.key, required this.tipoUsuario}); // Añadi para que los parametro fueran requeridos.
+  
+  final String tipoUsuario; //Esta variable recibe el tipo usuario.
 
   @override
   State<Navegacion> createState() => _NavegacionState();
@@ -15,7 +17,7 @@ class Navegacion extends StatefulWidget {
 class _NavegacionState extends State<Navegacion> {
   //indice para controlar las pantallas
   int _indiceActual = 0;
-  String tipoUsuario = "admin"; // "admin", "doctor" o "recepcionista"
+  String tipoUsuario = "admin"; // "admin", "doctor" o "recepcionista" 
 
 // Añadi este método para cerrar sesión
   void _logout(BuildContext context) {
@@ -30,10 +32,10 @@ class _NavegacionState extends State<Navegacion> {
   Widget build(BuildContext context) {
     //arreglo para pantallas
     List<Widget> pantallas;
-    //arreglo para los items que se van a mostras en pantalla dependiendo del usuario
+    //arreglo para los items que se van a mostras en pantalla dependiendo del usuario.
     List<BottomNavigationBarItem> items;
     //Si el usuario es admin se muestras las pantallas: principal, crearCita, mensajes, reportes
-    if (tipoUsuario == "admin") {
+    if (widget.tipoUsuario == "admin") { // Añadi este widget.tipoUsuario
       pantallas = [
         const PantallaPrincipal(),
         const PantallaCrearCita(),
@@ -47,7 +49,7 @@ class _NavegacionState extends State<Navegacion> {
         BottomNavigationBarItem(icon: Icon(Icons.description), label: 'Reportes'),
       ];
       //si el usuario es doctor se muestras las pantllas principal y mensajes
-    } else if (tipoUsuario == "doctor") {
+    } else if (widget.tipoUsuario == "doctor") { // Se añadio este widget tipo usuario 
       pantallas = [
         const PantallaPrincipal(),
         const PantallaMensajes(),
@@ -98,4 +100,3 @@ class _NavegacionState extends State<Navegacion> {
     );
   }
 }
-

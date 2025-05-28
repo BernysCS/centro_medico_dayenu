@@ -1,23 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:centro_medico_dayenu/navegacion.dart';
 
-/// Punto de entrada principal de la aplicación
 void main() => runApp(const MyApp());
 
-/// Widget principal que configura la aplicación MaterialApp
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,  // Oculta la banda de debug
-      home: const LoginScreen(),          // Establece LoginScreen como pantalla inicial
+      debugShowCheckedModeBanner: false,
+      home: const LoginScreen(),
     );
   }
 }
 
-/// Pantalla de inicio de sesión que maneja la autenticación del usuario
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -25,25 +22,30 @@ class LoginScreen extends StatefulWidget {
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
-/// Estado de la pantalla de login que maneja la lógica de autenticación
 class _LoginScreenState extends State<LoginScreen> {
-  // Controladores para los campos de texto
-  final _userController = TextEditingController();  // Controlador para campo de usuario
-  final _passController = TextEditingController();  // Controlador para campo de contraseña
-  String _error = '';  // Almacena mensajes de error
+  final _userController = TextEditingController();
+  final _passController = TextEditingController();
+  String _error = '';
+  
+  // --- AÑADIDO: Nuevas variables para el tipo de usuario ---
+  String? _selectedUserType; // 'admin', 'doctor', 'recepcionista'
+  final List<String> _userTypes = ['admin', 'doctor', 'recepcionista'];
 
-  /// Método que valida las credenciales y realiza el login
   void _login() {
-    // Verifica credenciales (usuario: admin, contraseña: 1234)
-    if (_userController.text.trim() == 'admin' && _passController.text == '1234') {
-      // Navega a la pantalla principal si las credenciales son correctas
+    // --- MODIFICADO: Validar tipo de usuario ---
+    if (_userController.text.trim() == 'admin' && 
+        _passController.text == '1234' &&
+        _selectedUserType != null) {
+      
+      // --- AÑADIDO: Pasar tipo de usuario a Navegacion (sin modificar navegacion.dart) ---
       Navigator.pushReplacement(
         context, 
-        MaterialPageRoute(builder: (_) => const Navegacion()),  
+        MaterialPageRoute(
+          builder: (_) => Navegacion(tipoUsuario: _selectedUserType!), // <-- Aquí se pasa
+        ),
       );
     } else {
-      // Muestra mensaje de error si las credenciales son incorrectas
-      setState(() => _error = 'Usuario o contraseña incorrectos');
+      setState(() => _error = 'Completa todos los campos');
     }
   }
 
@@ -52,46 +54,62 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       body: Center(
         child: SizedBox(
-          width: 300,  // Ancho fijo para el contenedor del formulario
+          width: 300,
           child: Column(
-            mainAxisSize: MainAxisSize.min,  // Columna ocupa solo espacio necesario
+            mainAxisSize: MainAxisSize.min,
             children: [
-              // Título del formulario
               const Text('Iniciar Sesión', 
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-              const SizedBox(height: 30),  // Espaciado
+              const SizedBox(height: 30),
               
-              // Campo de texto para usuario
               TextField(
                 controller: _userController,
                 decoration: const InputDecoration(
                   labelText: 'Usuario',
-                  border: OutlineInputBorder(),  // Borde tipo outline
+                  border: OutlineInputBorder(),
                 ),
               ),
-              const SizedBox(height: 15),  // Espaciado
+              const SizedBox(height: 15),
               
-              // Campo de texto para contraseña
               TextField(
                 controller: _passController,
-                obscureText: true,  // Oculta texto para contraseña
+                obscureText: true,
                 decoration: const InputDecoration(
                   labelText: 'Contraseña',
                   border: OutlineInputBorder(),
                 ),
               ),
-              const SizedBox(height: 20),  // Espaciado
+              const SizedBox(height: 15),
+
+              // --- AÑADIDO: Selector de tipo de usuario ---
+              DropdownButtonFormField<String>(
+                value: _selectedUserType,
+                items: _userTypes.map((type) {
+                  return DropdownMenuItem(
+                    value: type,
+                    child: Text(type),
+                  );
+                }).toList(),
+                onChanged: (value) {
+                  setState(() {
+                    _selectedUserType = value;
+                  });
+                },
+                decoration: const InputDecoration(
+                  labelText: 'Tipo de Usuario',
+                  border: OutlineInputBorder(),
+                ),
+              ),
+              const SizedBox(height: 20),
               
-              // Botón de login
               SizedBox(
-                width: double.infinity,  // Ocupa todo el ancho disponible
+                width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: _login,  // Ejecuta método _login al presionar
+                  onPressed: _login,
                   child: const Text('Ingresar'),
                 ),
               ),
               
-              // Muestra mensaje de error si existe
               if (_error.isNotEmpty)
                 Padding(
                   padding: const EdgeInsets.only(top: 10),
