@@ -19,6 +19,32 @@ class _NavegacionState extends State<Navegacion> {
   int _indiceActual = 0;
   String tipoUsuario = "admin"; // "admin", "doctor" o "recepcionista"
 
+    void _agregarCita(Cita nuevaCita) {
+  setState(() {
+    _citas.add(nuevaCita);
+    _indiceActual = 0; // regresar a la pantalla principal
+  });
+}
+
+ void _eliminarCita(int index) {
+    setState(() {
+      _citas.removeAt(index);
+    });
+  }
+
+    void _editarCita(int index, Cita citaEditada) {
+    setState(() {
+      _citas[index] = citaEditada;
+    });
+  }
+
+  void _cambiarEstadoCita(int index) {
+  setState(() {
+    _citas[index].enCurso = !_citas[index].enCurso;
+  });
+}
+
+
   @override
   Widget build(BuildContext context) {
     //arreglo para pantallas
@@ -28,7 +54,7 @@ class _NavegacionState extends State<Navegacion> {
     //Si el usuario es admin se muestras las pantallas: principal, crearCita, mensajes, reportes
     if (tipoUsuario == "admin") {
       pantallas = [
-        PantallaPrincipal(citas: _citas),
+        PantallaPrincipal(citas: _citas, onEliminar: _eliminarCita, onEditar: _editarCita, onCambiarEstado: _cambiarEstadoCita),
         PantallaCrearCita(onCrearCita: _agregarCita),
         const PantallaMensajes(),
         const PantallaReportes(),
@@ -42,7 +68,7 @@ class _NavegacionState extends State<Navegacion> {
       //si el usuario es doctor se muestras las pantllas principal y mensajes
     } else if (tipoUsuario == "doctor") {
       pantallas = [
-        PantallaPrincipal(citas: _citas),
+        PantallaPrincipal(citas: _citas, onEliminar: _eliminarCita, onEditar: _editarCita, onCambiarEstado: _cambiarEstadoCita),
         const PantallaMensajes(),
       ];
       items = const [
@@ -51,7 +77,7 @@ class _NavegacionState extends State<Navegacion> {
       ];
     } else { // si es usuario es recepcionista se muestran las pantallas principal, crearcita, mensajes
       pantallas = [
-        PantallaPrincipal(citas: _citas),
+        PantallaPrincipal(citas: _citas, onEliminar: _eliminarCita, onEditar: _editarCita, onCambiarEstado: _cambiarEstadoCita),
         PantallaCrearCita(onCrearCita: _agregarCita),
         const PantallaMensajes(),
       ];
@@ -80,13 +106,5 @@ class _NavegacionState extends State<Navegacion> {
       ),
     );
   }
-
-  void _agregarCita(Cita nuevaCita) {
-  setState(() {
-    _citas.add(nuevaCita);
-    _indiceActual = 0; // regresar a la pantalla principal
-  });
-}
-
 }
 

@@ -14,6 +14,7 @@ class PantallaCrearCita extends StatefulWidget {
 class _PantallaCrearCitaState extends State<PantallaCrearCita> {
   final _pacienteController = TextEditingController();
   final _motivoController = TextEditingController();
+  final _telefonoController = TextEditingController();
   DateTime _fechaSeleccionada = DateTime.now();
 
   void _crearCita() {
@@ -21,6 +22,7 @@ class _PantallaCrearCitaState extends State<PantallaCrearCita> {
       paciente: _pacienteController.text,
       fecha: _fechaSeleccionada,
       motivo: _motivoController.text,
+      telefono: _telefonoController.text,
     );
 
     widget.onCrearCita(nuevaCita); // Llama a la función pasada desde Navegacion
@@ -32,6 +34,7 @@ class _PantallaCrearCitaState extends State<PantallaCrearCita> {
       children: [
         TextField(controller: _pacienteController, decoration: InputDecoration(labelText: 'Paciente')),
         TextField(controller: _motivoController, decoration: InputDecoration(labelText: 'Motivo')),
+        TextField(controller: _telefonoController, decoration: InputDecoration(labelText: 'Telefono')),
         ElevatedButton(
           onPressed: _crearCita,
           child: Text('Crear cita'),
