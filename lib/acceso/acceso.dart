@@ -33,8 +33,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void _login() {
     // --- MODIFICADO: Validar tipo de usuario ---
-    if (_userController.text.trim() == 'admin' && 
-        _passController.text == '1234' &&
+    if (_userController.text.trim() == 'Maria' && 
+        _passController.text == '123' &&
         _selectedUserType != null) {
       
       // --- AÑADIDO: Pasar tipo de usuario a Navegacion (sin modificar navegacion.dart) ---

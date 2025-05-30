@@ -1,5 +1,4 @@
 import 'package:centro_medico_dayenu/acceso/acceso.dart';
-import 'package:centro_medico_dayenu/navegacion.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -15,7 +14,7 @@ class MainApp extends StatelessWidget {
       title: 'Dayenú',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.teal),
-      home: const LoginScreen(),  //Cambie Navegacion por el Login 
+      home: const LoginScreen(), //Cambie Navegacion por el Login
     );
   }
 }

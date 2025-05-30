@@ -56,14 +56,10 @@ class _PantallaMensajesState extends State<PantallaMensajes> {
                 children: [
                   const Text(
                     "Mensajes rápidos:",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 12),
-                  Text(
-                    "Seleccione un mensaje predefinido para enviar:",
-                  ),
+                  Text("Seleccione un mensaje predefinido para enviar:"),
                   ListView.separated(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
@@ -77,9 +73,7 @@ class _PantallaMensajesState extends State<PantallaMensajes> {
                           borderRadius: BorderRadius.circular(14),
                         ),
                         child: ListTile(
-                          title: Text(
-                            mensaje,
-                          ),
+                          title: Text(mensaje),
                           trailing: const Icon(
                             Icons.arrow_forward_ios,
                             size: 18,
@@ -132,9 +126,7 @@ class _PantallaMensajesState extends State<PantallaMensajes> {
                       }
                     },
                     icon: const Icon(Icons.send),
-                    label: const Text(
-                      "Enviar por WhatsApp",
-                    ),
+                    label: const Text("Enviar por WhatsApp"),
                   ),
                 ),
               ],
