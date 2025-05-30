@@ -1,3 +1,4 @@
+import 'package:centro_medico_dayenu/estilos/estilos.dart';
 import 'package:flutter/material.dart';
 
 class PantallaReportes extends StatelessWidget {
@@ -5,53 +6,70 @@ class PantallaReportes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Datos de ejemplo 
-    final Map<String, String> datos = { //Se declara este mapa , donde las claves y valores son de tipo string.
+    final Map<String, String> datos = {
       'Pacientes': '142',
       'Citas hoy': '15',
-      'Ingresos': '\Lps2,340',
+      'Ingresos': 'Lps2,340',
     };
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Reportes'),
-      ),
+      backgroundColor: AppColors.fondo,
       body: Padding(
-        padding: const EdgeInsets.all(12.0),
+        padding: const EdgeInsets.all(20),
         child: Column(
-       
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            const SizedBox(height: 24),
             Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
+                side: BorderSide(
+                  color: AppColors.fucsia.withOpacity(0.3),
+                  width: 1.5,
+                ),
+              ),
+              elevation: 6,
+              color: Colors.white,
+              shadowColor: AppColors.fucsia.withOpacity(0.3),
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.symmetric(
+                  vertical: 24,
+                  horizontal: 20,
+                ),
                 child: Column(
-                
-                  children: datos.entries.map((entry) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Text(entry.key),
+                  children:
+                      datos.entries.map((entry) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 14),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                entry.key,
+                                style: AppTextStyles.subtitulo.copyWith(
+                                  color: AppColors.textoPrincipal,
+                                ),
+                              ),
+                              Text(
+                                entry.value,
+                                style: AppTextStyles.subtitulo.copyWith(
+                                  color: AppColors.rosa,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
                           ),
-                          Text(
-                            entry.value,
-                            style: const TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      ),
-                    );
-                  }).toList(),
+                        );
+                      }).toList(),
                 ),
               ),
             ),
-            
-       //Pie de pagina
-            Padding(
-              padding: const EdgeInsets.only(top: 12.0),
-              child: Text(
-                'Actualizado: ${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year}',
-                style: const TextStyle(fontSize: 12, color: Colors.grey),
+            const SizedBox(height: 30),
+            Text(
+              'Actualizado: ${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year}',
+              style: AppTextStyles.textoPequeno.copyWith(
+                fontStyle: FontStyle.italic,
+                color: AppColors.verde.withOpacity(0.7),
               ),
             ),
           ],

@@ -1,4 +1,5 @@
 import 'package:centro_medico_dayenu/crear_cita/cita.dart';
+import 'package:centro_medico_dayenu/estilos/estilos.dart';
 import 'package:flutter/material.dart';
 
 class PantallaEditarCita extends StatefulWidget {
@@ -46,27 +47,79 @@ class _PantallaEditarCitaState extends State<PantallaEditarCita> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Editar cita')),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
+      backgroundColor: AppColors.fondo,
+      appBar: AppBar(
+        title: const Text('Editar cita'),
+        backgroundColor: AppColors.azul,
+        foregroundColor: Colors.white,
+      ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(20),
         child: Column(
           children: [
             TextField(
               controller: _pacienteController,
-              decoration: const InputDecoration(labelText: 'Nombre del paciente'),
+              decoration: InputDecoration(
+                labelText: 'Paciente',
+                labelStyle: AppTextStyles.textoPrincipal,
+                filled: true,
+                fillColor: AppColors.rosa.withOpacity(0.1),
+                prefixIcon: const Icon(Icons.person, color: AppColors.rosa),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: const BorderSide(color: AppColors.rosa),
+                ),
+              ),
             ),
+            const SizedBox(height: 15),
             TextField(
               controller: _motivoController,
-              decoration: const InputDecoration(labelText: 'Motivo'),
+              decoration: InputDecoration(
+                labelText: 'Motivo',
+                labelStyle: AppTextStyles.textoPrincipal,
+                filled: true,
+                fillColor: AppColors.fucsia.withOpacity(0.1),
+                prefixIcon: const Icon(Icons.edit_note, color: AppColors.fucsia),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: const BorderSide(color: AppColors.fucsia),
+                ),
+              ),
             ),
+            const SizedBox(height: 15),
             TextField(
               controller: _telefonoController,
-              decoration: const InputDecoration(labelText: 'Telefono'),
+              keyboardType: TextInputType.phone,
+              decoration: InputDecoration(
+                labelText: 'Teléfono',
+                labelStyle: AppTextStyles.textoPrincipal,
+                filled: true,
+                fillColor: AppColors.verde.withOpacity(0.1),
+                prefixIcon: const Icon(Icons.phone, color: AppColors.verde),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: const BorderSide(color: AppColors.verde),
+                ),
+              ),
             ),
-            const SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: _guardarEdicion,
-              child: const Text('Guardar cambios'),
+            const SizedBox(height: 25),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton.icon(
+                onPressed: _guardarEdicion,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.azul,
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+                icon: const Icon(Icons.save, color: Colors.white),
+                label: const Text(
+                  'Guardar cambios',
+                  style: TextStyle(fontSize: AppTextSizes.textoPrincipal, color: Colors.white),
+                ),
+              ),
             ),
           ],
         ),

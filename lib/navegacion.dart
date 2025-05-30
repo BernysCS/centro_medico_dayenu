@@ -4,6 +4,7 @@ import 'package:centro_medico_dayenu/crear_cita/crear_cita.dart';
 import 'package:centro_medico_dayenu/mensajes/mensajes.dart';
 import 'package:centro_medico_dayenu/principal/principal.dart';
 import 'package:centro_medico_dayenu/reportes/reportes.dart';
+import 'package:centro_medico_dayenu/estilos/estilos.dart';
 import 'package:flutter/material.dart';
 
 class Navegacion extends StatefulWidget {
@@ -132,31 +133,35 @@ class _NavegacionState extends State<Navegacion> {
     }
 
     //Barra baja que hace la navegación de las pantallas
-    return Scaffold(
-      // Añadi este apbar
-      appBar: AppBar(
-        title: const Text('Dayenú'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.logout),
-            onPressed: () => _logout(context),
-          ),
-        ],
+return Scaffold(
+  appBar: AppBar(
+    backgroundColor: AppColors.rosa, 
+    title: const Text(
+      'Dayenú',
+      style: TextStyle(color: AppColors.fondo),
+    ),
+    actions: [
+      IconButton(
+        icon: const Icon(Icons.logout, color: AppColors.fondo), // Icono blanco
+        onPressed: () => _logout(context),
       ),
-      body: pantallas[_indiceActual],
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.white,
-        selectedItemColor: Colors.teal,
-        unselectedItemColor: Colors.grey,
-        currentIndex: _indiceActual,
-        type: BottomNavigationBarType.fixed,
-        onTap: (index) {
-          setState(() {
-            _indiceActual = index;
-          });
-        },
-        items: items,
-      ),
-    );
+    ],
+  ),
+  body: pantallas[_indiceActual],
+  bottomNavigationBar: BottomNavigationBar(
+    backgroundColor: AppColors.fondo,
+    selectedItemColor: AppColors.azul,
+    unselectedItemColor: AppColors.verde,
+    currentIndex: _indiceActual,
+    type: BottomNavigationBarType.fixed,
+    onTap: (index) {
+      setState(() {
+        _indiceActual = index;
+      });
+    },
+    items: items,
+  ),
+);
+
   }
 }

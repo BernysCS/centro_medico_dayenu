@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:centro_medico_dayenu/estilos/estilos.dart';
 import 'package:centro_medico_dayenu/navegacion.dart';
 
 void main() => runApp(const MyApp());
@@ -26,22 +27,17 @@ class _LoginScreenState extends State<LoginScreen> {
   final _userController = TextEditingController();
   final _passController = TextEditingController();
   String _error = '';
-  
-  // --- AÑADIDO: Nuevas variables para el tipo de usuario ---
-  String? _selectedUserType; // 'admin', 'doctor', 'recepcionista'
+  String? _selectedUserType;
   final List<String> _userTypes = ['admin', 'doctor', 'recepcionista'];
 
   void _login() {
-    // --- MODIFICADO: Validar tipo de usuario ---
-    if (_userController.text.trim() == 'Maria' && 
+    if (_userController.text.trim() == 'Maria' &&
         _passController.text == '123' &&
         _selectedUserType != null) {
-      
-      // --- AÑADIDO: Pasar tipo de usuario a Navegacion (sin modificar navegacion.dart) ---
       Navigator.pushReplacement(
-        context, 
+        context,
         MaterialPageRoute(
-          builder: (_) => Navegacion(tipoUsuario: _selectedUserType!), // <-- Aquí se pasa
+          builder: (_) => Navegacion(tipoUsuario: _selectedUserType!),
         ),
       );
     } else {
@@ -52,70 +48,101 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.fondo,
       body: Center(
-        child: SizedBox(
-          width: 300,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Text('Iniciar Sesión', 
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-              const SizedBox(height: 30),
-              
-              TextField(
-                controller: _userController,
-                decoration: const InputDecoration(
-                  labelText: 'Usuario',
-                  border: OutlineInputBorder(),
-                ),
-              ),
-              const SizedBox(height: 15),
-              
-              TextField(
-                controller: _passController,
-                obscureText: true,
-                decoration: const InputDecoration(
-                  labelText: 'Contraseña',
-                  border: OutlineInputBorder(),
-                ),
-              ),
-              const SizedBox(height: 15),
+        child: Card(
+          elevation: 8,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+          margin: const EdgeInsets.symmetric(horizontal: 24),
+          child: Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: SizedBox(
+              width: 320,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Text('ACCEDER', style: AppTextStyles.tituloGrande),
+                  const SizedBox(height: 30),
 
-              // --- AÑADIDO: Selector de tipo de usuario ---
-              DropdownButtonFormField<String>(
-                value: _selectedUserType,
-                items: _userTypes.map((type) {
-                  return DropdownMenuItem(
-                    value: type,
-                    child: Text(type),
-                  );
-                }).toList(),
-                onChanged: (value) {
-                  setState(() {
-                    _selectedUserType = value;
-                  });
-                },
-                decoration: const InputDecoration(
-                  labelText: 'Tipo de Usuario',
-                  border: OutlineInputBorder(),
-                ),
+                  TextField(
+                    controller: _userController,
+                    decoration: InputDecoration(
+                      labelText: 'Usuario',
+                      prefixIcon: const Icon(Icons.person_outline),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 15),
+
+                  TextField(
+                    controller: _passController,
+                    obscureText: true,
+                    decoration: InputDecoration(
+                      labelText: 'Contraseña',
+                      prefixIcon: const Icon(Icons.lock_outline),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 15),
+
+                  DropdownButtonFormField<String>(
+                    value: _selectedUserType,
+                    items: _userTypes
+                        .map((type) => DropdownMenuItem(
+                              value: type,
+                              child: Text(type),
+                            ))
+                        .toList(),
+                    onChanged: (value) {
+                      setState(() {
+                        _selectedUserType = value;
+                      });
+                    },
+                    decoration: InputDecoration(
+                      labelText: 'Tipo de Usuario',
+                      prefixIcon: const Icon(Icons.account_box_outlined),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.azul,
+                        foregroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        textStyle: AppTextStyles.textoPrincipal.copyWith(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      onPressed: _login,
+                      child: const Text('Ingresar'),
+                    ),
+                  ),
+
+                  if (_error.isNotEmpty)
+                    Padding(
+                      padding: const EdgeInsets.only(top: 16),
+                      child: Text(
+                        _error,
+                        style: const TextStyle(color: Colors.red),
+                      ),
+                    ),
+                ],
               ),
-              const SizedBox(height: 20),
-              
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: _login,
-                  child: const Text('Ingresar'),
-                ),
-              ),
-              
-              if (_error.isNotEmpty)
-                Padding(
-                  padding: const EdgeInsets.only(top: 10),
-                  child: Text(_error, style: const TextStyle(color: Colors.red)),
-                ),
-            ],
+            ),
           ),
         ),
       ),
