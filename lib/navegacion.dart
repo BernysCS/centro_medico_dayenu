@@ -11,7 +11,7 @@ class Navegacion extends StatefulWidget {
   const Navegacion({
     super.key,
     required this.tipoUsuario,
-  }); // Añadi para que los parametro fueran requeridos.
+  });
 
   final String tipoUsuario; //Esta variable recibe el tipo usuario.
 
@@ -51,7 +51,6 @@ class _NavegacionState extends State<Navegacion> {
     });
   }
 
-  // Añadi este método para cerrar sesión
   void _logout(BuildContext context) {
     Navigator.pushReplacement(
       context,

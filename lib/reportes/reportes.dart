@@ -7,9 +7,9 @@ class PantallaReportes extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Map<String, String> datos = {
-      'Pacientes': '142',
-      'Citas hoy': '15',
-      'Ingresos': 'Lps2,340',
+      'Total citas': '142',
+      'Citas canceladas': '15',
+      'Ingresos': 'Lps 2,340',
     };
 
     return Scaffold(
@@ -24,13 +24,13 @@ class PantallaReportes extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16),
                 side: BorderSide(
-                  color: AppColors.fucsia.withOpacity(0.3),
+                  color: AppColors.fucsia.withValues(alpha: 0.3),
                   width: 1.5,
                 ),
               ),
               elevation: 6,
               color: Colors.white,
-              shadowColor: AppColors.fucsia.withOpacity(0.3),
+              shadowColor: AppColors.fucsia.withValues(alpha: 0.3),
               child: Padding(
                 padding: const EdgeInsets.symmetric(
                   vertical: 24,
@@ -69,7 +69,7 @@ class PantallaReportes extends StatelessWidget {
               'Actualizado: ${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year}',
               style: AppTextStyles.textoPequeno.copyWith(
                 fontStyle: FontStyle.italic,
-                color: AppColors.verde.withOpacity(0.7),
+                color: AppColors.verde,
               ),
             ),
           ],

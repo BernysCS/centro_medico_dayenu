@@ -14,7 +14,7 @@ class MainApp extends StatelessWidget {
       title: 'Dayenú',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.teal),
-      home: const LoginScreen(), //Cambie Navegacion por el Login
+      home: const LoginScreen(),
     );
   }
 }
