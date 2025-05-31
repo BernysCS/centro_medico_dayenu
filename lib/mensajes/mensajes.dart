@@ -20,13 +20,15 @@ class _PantallaMensajesState extends State<PantallaMensajes> {
   ];
 
   Future<void> _abrirWhatsApp(String mensaje) async {
-    final url = Uri.parse("https://wa.me/?text=${Uri.encodeComponent(mensaje)}");
+    final url = Uri.parse(
+      "https://wa.me/?text=${Uri.encodeComponent(mensaje)}",
+    );
     if (await canLaunchUrl(url)) {
       await launchUrl(url, mode: LaunchMode.externalApplication);
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Error al abrir WhatsApp")),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text("Error al abrir WhatsApp")));
     }
   }
 
@@ -67,7 +69,7 @@ class _PantallaMensajesState extends State<PantallaMensajes> {
                         final mensaje = _mensajesPreestablecidos[index];
                         return Container(
                           decoration: BoxDecoration(
-                            color: AppColors.rosa.withOpacity(0.3),
+                            color: AppColors.rosa.withAlpha(77),
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: ListTile(
@@ -75,7 +77,10 @@ class _PantallaMensajesState extends State<PantallaMensajes> {
                               mensaje,
                               style: AppTextStyles.textoPrincipal,
                             ),
-                            trailing: const Icon(Icons.arrow_forward_ios, size: 18),
+                            trailing: const Icon(
+                              Icons.arrow_forward_ios,
+                              size: 18,
+                            ),
                             onTap: () {
                               setState(() {
                                 _mensajeSeleccionado = mensaje;

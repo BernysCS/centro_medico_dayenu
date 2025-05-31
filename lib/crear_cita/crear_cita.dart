@@ -43,7 +43,7 @@ class _PantallaCrearCitaState extends State<PantallaCrearCita> {
                 labelText: 'Paciente',
                 labelStyle: AppTextStyles.textoPrincipal,
                 filled: true,
-                fillColor: AppColors.rosa.withOpacity(0.1),
+                fillColor: AppColors.rosa.withAlpha(26),
                 prefixIcon: const Icon(Icons.person, color: AppColors.rosa),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
@@ -58,7 +58,7 @@ class _PantallaCrearCitaState extends State<PantallaCrearCita> {
                 labelText: 'Motivo',
                 labelStyle: AppTextStyles.textoPrincipal,
                 filled: true,
-                fillColor: AppColors.fucsia.withOpacity(0.1),
+                fillColor: AppColors.fucsia.withAlpha(26),
                 prefixIcon: const Icon(Icons.edit_note, color: AppColors.fucsia),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
@@ -74,7 +74,7 @@ class _PantallaCrearCitaState extends State<PantallaCrearCita> {
                 labelText: 'Teléfono',
                 labelStyle: AppTextStyles.textoPrincipal,
                 filled: true,
-                fillColor: AppColors.verde.withOpacity(0.1),
+                fillColor: AppColors.verde.withAlpha(26),
                 prefixIcon: const Icon(Icons.phone, color: AppColors.verde),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),

@@ -52,7 +52,9 @@ class _LoginScreenState extends State<LoginScreen> {
       body: Center(
         child: Card(
           elevation: 8,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
           margin: const EdgeInsets.symmetric(horizontal: 24),
           child: Padding(
             padding: const EdgeInsets.all(24.0),
@@ -91,12 +93,15 @@ class _LoginScreenState extends State<LoginScreen> {
 
                   DropdownButtonFormField<String>(
                     value: _selectedUserType,
-                    items: _userTypes
-                        .map((type) => DropdownMenuItem(
-                              value: type,
-                              child: Text(type),
-                            ))
-                        .toList(),
+                    items:
+                        _userTypes
+                            .map(
+                              (type) => DropdownMenuItem(
+                                value: type,
+                                child: Text(type),
+                              ),
+                            )
+                            .toList(),
                     onChanged: (value) {
                       setState(() {
                         _selectedUserType = value;

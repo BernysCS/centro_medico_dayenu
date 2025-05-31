@@ -8,10 +8,7 @@ import 'package:centro_medico_dayenu/estilos/estilos.dart';
 import 'package:flutter/material.dart';
 
 class Navegacion extends StatefulWidget {
-  const Navegacion({
-    super.key,
-    required this.tipoUsuario,
-  });
+  const Navegacion({super.key, required this.tipoUsuario});
 
   final String tipoUsuario; //Esta variable recibe el tipo usuario.
 
@@ -132,35 +129,34 @@ class _NavegacionState extends State<Navegacion> {
     }
 
     //Barra baja que hace la navegación de las pantallas
-return Scaffold(
-  appBar: AppBar(
-    backgroundColor: AppColors.rosa, 
-    title: const Text(
-      'Dayenú',
-      style: TextStyle(color: AppColors.fondo),
-    ),
-    actions: [
-      IconButton(
-        icon: const Icon(Icons.logout, color: AppColors.fondo), // Icono blanco
-        onPressed: () => _logout(context),
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: AppColors.rosa,
+        title: const Text('Dayenú', style: TextStyle(color: AppColors.fondo)),
+        actions: [
+          IconButton(
+            icon: const Icon(
+              Icons.logout,
+              color: AppColors.fondo,
+            ), // Icono blanco
+            onPressed: () => _logout(context),
+          ),
+        ],
       ),
-    ],
-  ),
-  body: pantallas[_indiceActual],
-  bottomNavigationBar: BottomNavigationBar(
-    backgroundColor: AppColors.fondo,
-    selectedItemColor: AppColors.azul,
-    unselectedItemColor: AppColors.verde,
-    currentIndex: _indiceActual,
-    type: BottomNavigationBarType.fixed,
-    onTap: (index) {
-      setState(() {
-        _indiceActual = index;
-      });
-    },
-    items: items,
-  ),
-);
-
+      body: pantallas[_indiceActual],
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: AppColors.fondo,
+        selectedItemColor: AppColors.azul,
+        unselectedItemColor: AppColors.verde,
+        currentIndex: _indiceActual,
+        type: BottomNavigationBarType.fixed,
+        onTap: (index) {
+          setState(() {
+            _indiceActual = index;
+          });
+        },
+        items: items,
+      ),
+    );
   }
 }
